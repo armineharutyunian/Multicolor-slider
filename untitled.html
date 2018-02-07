@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Multicolor slider</title>
+	<script type="text/javascript" src="script.js"></script>
+	<link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+	<form >
+		<input type="range" name="foo" id="input" >
+		<output for="foo" onforminput="value = foo.valueAsNumber;" id="output"></output>
+	</form>
+	
+	<p id="caption">Please input numbers between 1 and 100</p>
+		
+		<span>Min value: </span> <input type="number" name="min" id="min-value" min="1" max="100"><br>
+		<span>Max value: </span> <input type="number" name="max" id="max-value" min="1" max="100"><br>
+		<button onclick="makeRange()">Submit</button>
+		
+		<script type="text/javascript">
+		var el = document.getElementById('input');
+		var out = document.getElementById('output');
+ 		function track() {
+ 			var width = el.offsetWidth;
+ 			var newPoint = (+el.value - el.attributes.min.value) / (el.attributes.max.value - el.attributes.min.value);
+ 			var offset = -1;
+ 			if (newPoint < 0) { newPlace = 0; }
+			else if (newPoint > 1) { newPlace = width; }
+			else { var newPlace = width * newPoint + offset; offset -= newPoint; }
+
+			out.style.left = newPlace + "px";
+			out.style.marginLeft = offset + "%";
+			out.innerText = el.value;
+ 		}
+
+
+ 		el.onchange = track;
+		track();
+		</script>
+</body>
+</html>
